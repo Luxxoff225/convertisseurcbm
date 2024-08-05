@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur CBM et Prix XOF - Outil de calcul de volume en cm et coût en franc CFA</title>
+    <meta name="description" content="Calculez facilement le CBM (mètre cube) à partir des dimensions en cm et le prix total en XOF pour vos besoins logistiques et d'expédition. Outil gratuit pour professionnels et particuliers.">
+    <meta name="keywords" content="CBM, calculateur, mètre cube, logistique, expédition, volume, fret, prix, coût, XOF, franc CFA, centimètres">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --input-background: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        h1, h2 {
+            color: var(--primary-color);
+        }
+        .calculator {
+            background-color: var(--input-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+        #result {
+            margin-top: 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calculateur CBM et Prix XOF</h1>
+        <p>Outil simple et rapide pour calculer le volume en mètre cube et le coût total en franc CFA</p>
+    </header>
+
+    <div class="container">
+        <section class="calculator">
+            <h2>Calculez le CBM et le Prix</h2>
+            <div class="input-group">
+                <label for="longueur">Longueur (en cm):</label>
+                <input type="number" id="longueur" step="0.1" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="largeur">Largeur (en cm):</label>
+                <input type="number" id="largeur" step="0.1" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="hauteur">Hauteur (en cm):</label>
+                <input type="number" id="hauteur" step="0.1" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="prixParCBM">Prix par CBM (en XOF):</label>
+                <input type="number" id="prixParCBM" step="1" min="0" required>
+            </div>
+            <button onclick="calculerCBMEtPrix()">Calculer CBM et Prix</button>
+            <div id="result"></div>
+        </section>
+
+        <section>
+            <h2>Qu'est-ce que le CBM?</h2>
+            <p>Le CBM (Cubic Meter) ou mètre cube est une unité de mesure de volume couramment utilisée dans le domaine de la logistique et du transport. Il représente l'espace occupé par un objet ou un colis en trois dimensions.</p>
+        </section>
+
+        <section>
+            <h2>Pourquoi utiliser un calculateur CBM et prix en XOF?</h2>
+            <p>Un calculateur CBM et prix en XOF est essentiel pour:</p>
+            <ul>
+                <li>Estimer précisément les coûts d'expédition en franc CFA</li>
+                <li>Planifier l'espace de stockage et son coût en Afrique de l'Ouest</li>
+                <li>Optimiser le chargement des conteneurs et le budget en monnaie locale</li>
+                <li>Comparer différentes options d'emballage et de tarification pour le marché africain</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Comment utiliser notre calculateur?</h2>
+            <p>Entrez simplement la longueur, la largeur et la hauteur de votre objet ou colis en centimètres, ainsi que le prix par CBM en franc CFA (XOF) dans les champs correspondants. Cliquez sur "Calculer CBM et Prix" pour obtenir instantanément le volume en mètres cubes et le coût total en XOF.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Calculateur CBM et Prix XOF. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function calculerCBMEtPrix() {
+            const longueur = parseFloat(document.getElementById('longueur').value);
+            const largeur = parseFloat(document.getElementById('largeur').value);
+            const hauteur = parseFloat(document.getElementById('hauteur').value);
+            const prixParCBM = parseFloat(document.getElementById('prixParCBM').value);
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(longueur) || isNaN(largeur) || isNaN(hauteur) || isNaN(prixParCBM) || 
+                longueur <= 0 || largeur <= 0 || hauteur <= 0 || prixParCBM < 0) {
+                resultDiv.innerHTML = "Veuillez entrer des valeurs valides (nombres positifs) pour toutes les dimensions et le prix.";
+                return;
+            }
+
+            const cbm = (longueur * largeur * hauteur) / 1000000; // Conversion de cm³ en m³
+            const prixTotal = cbm * prixParCBM;
+
+            resultDiv.innerHTML = `
+                Le CBM (volume) est de ${cbm.toFixed(6)} mètres cubes<br>
+                Le prix total est de ${prixTotal.toFixed(0)} XOF
+            `;
+        }
+    </script>
+</body>
+</html>
